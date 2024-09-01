@@ -76,7 +76,7 @@ jobs:
 
       - name: Log in to EKS Cluster
         run: |
-          aws eks update-kubeconfig --name eksdemo --region ap-south-1
+          aws eks update-kubeconfig --name EKS_CLOUD --region ap-south-1
 
       - name: Deploy to EKS with Helm
         run: |
