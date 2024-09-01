@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -47,6 +54,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
       - name: Setup Helm
         uses: azure/setup-helm@v1
       
@@ -62,7 +76,7 @@ jobs:
 
       - name: Log in to EKS Cluster
         run: |
-          aws eks update-kubeconfig --name EKS_CLOUD --region ap-south-1
+          aws eks update-kubeconfig --name eksdemo --region ap-south-1
 
       - name: Deploy to EKS with Helm
         run: |
