@@ -54,11 +54,11 @@ jobs:
       #       exit 1
       #     fi
 
-      - name: Upload Trivy report as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: trivy-report
-          path: trivy-report.json
+      #- name: Upload Trivy report as an artifact
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: trivy-report
+      #    path: trivy-report.json
       
       - name: Push Docker image to Docker Hub
         run: |
