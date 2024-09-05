@@ -44,21 +44,21 @@ jobs:
           wget https://github.com/aquasecurity/trivy/releases/download/v0.42.0/trivy_0.42.0_Linux-64bit.deb
           sudo dpkg -i trivy_0.42.0_Linux-64bit.deb
 
-      # - name: Scan Docker image with Trivy and generate report
-      #   id: trivy_scan
-      #   run: |
-      #     trivy image --exit-code 0 --format json --output trivy-report.json emergencydevops/dockerlabs:latest
-      #     trivy image --exit-code 1 emergencydevops/dockerlabs:latest
-      #     if [ $? -ne 0 ]; then
-      #       echo "Vulnerabilities detected!"
-      #       exit 1
-      #     fi
+      - name: Scan Docker image with Trivy and generate report
+        id: trivy_scan
+        run: |
+          trivy image --exit-code 0 --format json --output trivy-report.json emergencydevops/dockerlabs:latest
+          trivy image --exit-code 1 emergencydevops/dockerlabs:latest
+          if [ $? -ne 0 ]; then
+            echo "Vulnerabilities detected!"
+            exit 1
+          fi
 
-      #- name: Upload Trivy report as an artifact
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #    name: trivy-report
-      #    path: trivy-report.json
+      - name: Upload Trivy report as an artifact
+       uses: actions/upload-artifact@v2
+       with:
+         name: trivy-report
+         path: trivy-report.json
       
       - name: Push Docker image to Docker Hub
         run: |
