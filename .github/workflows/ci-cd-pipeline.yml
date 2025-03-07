@@ -25,11 +25,11 @@ jobs:
       
       - name: Build Docker image
         run: |
-          docker build -t emergencytechops/mlops-models:latest .
+          docker build -t vikram75691/my-ubuntu-image:latest .
 
       - name: Tag Docker image
         run: |
-          docker tag emergencytechops/mlops-models:latest emergencytechops/mlops-models:${{ github.sha }}
+          docker tag vikram75691/my-ubuntu-image:latest vikram75691/my-ubuntu-image:${{ github.sha }}
       
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -47,8 +47,8 @@ jobs:
       # - name: Scan Docker image with Trivy and generate report
       #   id: trivy_scan
       #   run: |
-      #     trivy image --exit-code 0 --format json --output trivy-report.json emergencytechops/mlops-models:latest
-      #     trivy image --exit-code 1 emergencytechops/mlops-models:latest
+      #     trivy image --exit-code 0 --format json --output trivy-report.json vikram75691/my-ubuntu-image:latest
+      #     trivy image --exit-code 1 vikram75691/my-ubuntu-image:latest
       #     if [ $? -ne 0 ]; then
       #       echo "Vulnerabilities detected!"
       #       exit 1
@@ -62,8 +62,8 @@ jobs:
       
       - name: Push Docker image to Docker Hub
         run: |
-          docker push emergencytechops/mlops-models:latest
-          docker push emergencytechops/mlops-models:${{ github.sha }}
+          docker push vikram75691/my-ubuntu-image:latest
+          docker push vikram75691/my-ubuntu-image:${{ github.sha }}
 
   deploy:
     needs: build
@@ -85,7 +85,7 @@ jobs:
       - name: Generate Helm chart
         run: |
           helm create dockerlabs
-          sed -i 's|repository: ""|repository: emergencytechops/mlops-models|' ./dockerlabs/values.yaml
+          sed -i 's|repository: ""|repository: vikram75691/my-ubuntu-image|' ./dockerlabs/values.yaml
           sed -i 's|tag: ""|tag: latest|' ./dockerlabs/values.yaml
 
       - name: Package Helm chart
