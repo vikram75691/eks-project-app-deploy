@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/EmergencyTechOps/eks-project-app-deploy.git
+    repoURL: https://github.com/vikram75691/eks-project-app-deploy.git
     targetRevision: HEAD
     path: helm/dockerlabs
   destination:
